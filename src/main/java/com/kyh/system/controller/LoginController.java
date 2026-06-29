@@ -31,6 +31,7 @@ public class LoginController {
 		return "/login/login";
 	}
 
+	//userlogin
 	@RequestMapping(value = "/login/userLogin", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView model = new ModelAndView();
