@@ -15,22 +15,41 @@ xmlns:float="http://www.w3.org/1999/xhtml">
 	            $("#userid").val(savedUserId);
 	        }
 	    });
+		
     //ログインイベント
-    function login(){
-            $("#message").html("ログインしています");
-            var id=$("#userid").val();
-            var password=$("#password").val();
-            if(!id){
-                $("#message").html("ユーザー名を入力してください！");
-                return false;
-            }
-            else if(!password){
-                $("#message").html("パスワードを入力してください！");
-                return false;
-            }else{
-                $("#loginFrom").submit();
-            }
-        }
+	function login(){
+	    var id=$("#userid").val();
+	    var password=$("#password").val();
+		var idPattern = new RegExp("^[a-zA-Z0-9_-]+$");
+		var pwPattern = new RegExp("^[a-zA-Z0-9]+$");
+
+		if(!id){
+		    alert("ユーザー名を入力してください！");
+		    return false;
+		}
+		if(!password){
+		    alert("パスワードを入力してください！");
+		    return false;
+		}
+		if (!idPattern.test(id)) {
+		    alert("ユーザコードは[a-z][A-Z][0-9][_][-]のみで入力してください。");
+		    return false;
+		}
+		if (!pwPattern.test(password)) {
+				    alert("パスワードは[a-z][A-Z][0-9]のみで入力してください。");
+				    return false;
+		}
+		if (id.length < 8 || id.length > 20) {
+				    alert("ユーザコードは８～20文字以下で入力してください。");
+				    return false;
+		}
+		if (password.length < 8 || password.length > 15) {
+				    alert("パスワードは８～15文字以下で入力してください。");
+				    return false;
+		}
+			$("#loginFrom").submit();
+		}
+		
 	function getCookie(name){
 		    var cookies = document.cookie.split(";");
 		    for(var i = 0; i < cookies.length; i++){
