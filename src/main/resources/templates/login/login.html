@@ -8,6 +8,13 @@ xmlns:float="http://www.w3.org/1999/xhtml">
     <script type="text/javascript" src="/js/jquery-1.10.1.js"></script>
 </head>
 <script>
+	//画面表示時にCookieからユーザーIDを取得
+	$(function(){
+	        var savedUserId = getCookie("userid");
+	        if(savedUserId){
+	            $("#userid").val(savedUserId);
+	        }
+	    });
     //ログインイベント
     function login(){
             $("#message").html("ログインしています");
@@ -24,6 +31,16 @@ xmlns:float="http://www.w3.org/1999/xhtml">
                 $("#loginFrom").submit();
             }
         }
+	function getCookie(name){
+		    var cookies = document.cookie.split(";");
+		    for(var i = 0; i < cookies.length; i++){
+		        var cookie = cookies[i].trim();
+		        if(cookie.indexOf(name + "=") == 0){
+		            return decodeURIComponent(cookie.substring(name.length + 1));
+		        }
+		    }
+		    return "";
+		}	
 </script>
 <body>
 <div class="second_body">

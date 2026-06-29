@@ -1,5 +1,6 @@
 package com.kyh.system.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -42,8 +43,15 @@ public class LoginController {
 
 		if (result != null) {
 			session.setAttribute("user", result);
+			Cookie cookie = new Cookie("userid", result.getUserid());
+			cookie.setPath("/");
+			response.addCookie(cookie);
 			model.setViewName("login/index");
 		} else {
+//			Cookie cookie = new Cookie("userid", "");
+//		    cookie.setPath("/");
+//		    cookie.setMaxAge(0);
+//		    response.addCookie(cookie);
 			model.addObject("MSG", "ユーザー名またはパスワードが間違っています");
 			model.setViewName("/login/login");
 		}
