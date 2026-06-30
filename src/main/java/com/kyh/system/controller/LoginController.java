@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.kyh.system.model.User;
+import com.kyh.system.model.UserAuth;
 import com.kyh.system.service.UserService;
 
 @Controller
@@ -36,14 +36,15 @@ public class LoginController {
 	@RequestMapping(value = "/login/userLogin", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView userLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView model = new ModelAndView();
-		User user = new User();
-		user.setUserid(request.getParameter("userid"));
-		user.setPassword(request.getParameter("password"));
-		User result = userService.getUserByUserIdAndPassword(user);
+		UserAuth userAuth = new UserAuth();
+		userAuth.setUserCode(request.getParameter("userCode"));
+		userAuth.setPassword(request.getParameter("password"));
+
+		UserAuth result = userService.getUserByUserCodeAndPassword(userAuth);
 
 		if (result != null) {
 			session.setAttribute("user", result);
-			Cookie cookie = new Cookie("userid", result.getUserid());
+			Cookie cookie = new Cookie("userCode", result.getUserCode());
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			model.setViewName("login/index");

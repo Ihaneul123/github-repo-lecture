@@ -10,45 +10,47 @@ xmlns:float="http://www.w3.org/1999/xhtml">
 <script>
 	//画面表示時にCookieからユーザーIDを取得
 	$(function(){
-	        var savedUserId = getCookie("userid");
-	        if(savedUserId){
-	            $("#userid").val(savedUserId);
-	        }
-	    });
+	    var savedUserCode = getCookie("userCode");
+	    if(savedUserCode){
+	        $("#userCode").val(savedUserCode);
+	    }
+	});
 		
     //ログインイベント
 	function login(){
-	    var id=$("#userid").val();
-	    var password=$("#password").val();
-		var idPattern = new RegExp("^[a-zA-Z0-9_-]+$");
-		var pwPattern = new RegExp("^[a-zA-Z0-9]+$");
+	    var userCode = $("#userCode").val();
+	    var password = $("#password").val();
 
-		if(!id){
-		    alert("ユーザー名を入力してください！");
-		    return false;
-		}
-		if(!password){
-		    alert("パスワードを入力してください！");
-		    return false;
-		}
-		if (!idPattern.test(id)) {
-		    alert("ユーザコードは[a-z][A-Z][0-9][_][-]のみで入力してください。");
-		    return false;
-		}
-		if (!pwPattern.test(password)) {
-				    alert("パスワードは[a-z][A-Z][0-9]のみで入力してください。");
-				    return false;
-		}
-		if (id.length < 8 || id.length > 20) {
-				    alert("ユーザコードは８～20文字以下で入力してください。");
-				    return false;
-		}
-		if (password.length < 8 || password.length > 15) {
-				    alert("パスワードは８～15文字以下で入力してください。");
-				    return false;
-		}
-			$("#loginFrom").submit();
-		}
+	    var userCodePattern = new RegExp("^[a-zA-Z0-9_-]+$");
+	    var pwPattern = new RegExp("^[a-zA-Z0-9]+$");
+
+	    if(!userCode){
+	        alert("ユーザコードを入力してください。");
+	        return false;
+	    }
+	    if(!password){
+	        alert("パスワードを入力してください。");
+	        return false;
+	    }
+	    if (!userCodePattern.test(userCode)) {
+	        alert("ユーザコードは[a-z][A-Z][0-9][_][-]のみで入力してください。");
+	        return false;
+	    }
+	    if (!pwPattern.test(password)) {
+	        alert("パスワードは[a-z][A-Z][0-9]のみで入力してください。");
+	        return false;
+	    }
+	    if (userCode.length < 8 || userCode.length > 20) {
+	        alert("ユーザコードは8～20文字で入力してください。");
+	        return false;
+	    }
+	    if (password.length < 8 || password.length > 15) {
+	        alert("パスワードは8～15文字で入力してください。");
+	        return false;
+	    }
+
+	    $("#loginFrom").submit();
+	}
 		
 	function getCookie(name){
 		    var cookies = document.cookie.split(";");
@@ -65,13 +67,13 @@ xmlns:float="http://www.w3.org/1999/xhtml">
 <div class="second_body">
     <form id="loginFrom" action="userLogin" method="post">
         <div class="logo"></div>
-        <div class="title-jp">ユーザー情報管理システム_コミットテスト</div>
+        <div class="title-jp">社内統合管理システム</div>
         <div class="title-en" style="">User Information Management System_commit test</div>
         <div class="message" data-bind="html:message"></div>
         <table border="0" style="width:300px;">
             <tr>
                 <td style="white-space:nowrap; padding-bottom: 5px;width:55px;font-size:10px">ユーザーID：</td>
-                <td colspan="2"><input type="text"  name="userid" id="userid" class="login" data-bind="value:form.userid" /></td>
+                <td colspan="2"><input type="text"  name="userCode" id="userCode" class="login" data-bind="value:form.usercord" /></td>
             </tr>
             <tr>
                 <td class="lable" style="white-space:nowrap; letter-spacing: 0.5em; vertical-align: middle;font-size:10px">パスワード：</td>

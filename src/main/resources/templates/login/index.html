@@ -24,7 +24,7 @@
 						<a>
 							<th:em>
 								<i class="user-name"></i>
-								<span th:text="${session.user.getUsername()}"></span>
+								<span th:text="${session.user.getUserName()}"></span>
 							</th:em>&nbsp;がログインしています。
 						</a>
 					</div>
@@ -84,7 +84,7 @@
 				<table align="center" width="360px" style="height:200px; text-align:center;">
 					<tr>
 						<td colspan="2">
-							<input type="hidden" name="no" th:value="${session.user.getNo()}" id="hiddenNo"></input>
+							<input type="hidden" name="no" th:value="${session.user.userId}" id="hiddenNo"></input>
 						</td>
 					</tr>
 					<tr>

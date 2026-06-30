@@ -3,6 +3,7 @@ package com.kyh.system.service;
 import java.util.List;
 
 import com.kyh.system.model.User;
+import com.kyh.system.model.UserAuth;
 
 public interface UserService {
 
@@ -21,4 +22,6 @@ public interface UserService {
 	int update(User user);
 
 	public int getCount();
+	
+	UserAuth getUserByUserCodeAndPassword(UserAuth userAuth);
 }

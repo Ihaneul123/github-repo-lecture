@@ -1,13 +1,18 @@
 package com.kyh.system.Impl;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import com.github.pagehelper.PageHelper;
+import com.kyh.system.mapper.UserAuthMapper;
 import com.kyh.system.mapper.UserMapper;
 import com.kyh.system.model.User;
+import com.kyh.system.model.UserAuth;
+import com.kyh.system.model.UserAuthExample;
 import com.kyh.system.model.UserExample;
 import com.kyh.system.service.UserService;
 
@@ -17,6 +22,9 @@ public class UserServiceImpl implements UserService {
 	// データベース操作のマッパーをインジェクションする
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private UserAuthMapper userAuthMapper;
 
 	/**
 	 * ユーザーを追加する
@@ -99,4 +107,27 @@ public class UserServiceImpl implements UserService {
 
 		return count;
 	}
+
+	@Override
+	public UserAuth getUserByUserCodeAndPassword(UserAuth userAuth) {
+
+	    UserAuthExample example = new UserAuthExample();
+	    UserAuthExample.Criteria criteria = example.createCriteria();
+
+	    String md5Password = DigestUtils
+	            .md5DigestAsHex(userAuth.getPassword().getBytes(StandardCharsets.UTF_8))
+	            .toUpperCase();
+
+	    criteria.andUserCodeEqualTo(userAuth.getUserCode());
+	    criteria.andPasswordEqualTo(md5Password);
+
+	    List<UserAuth> users = userAuthMapper.selectByExample(example);
+
+	    if (!users.isEmpty()) {
+	        return users.get(0);
+	    } else {
+	        return null;
+	    }
+	}
+	
 }

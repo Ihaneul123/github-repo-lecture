@@ -56,6 +56,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.33</version>  <!-- 使用する MySQL ドライバのバージョン -->
 		</dependency>
+		
+		<!-- PostgreSQL の JDBC ドライバ -->
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		</dependency>
 
 		<!-- Spring Boot の Thymeleaf スターター（Thymeleaf テンプレートエンジンを使ったビューのレンダリング） -->
 		<dependency>
