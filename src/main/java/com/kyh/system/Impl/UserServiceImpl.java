@@ -108,6 +108,10 @@ public class UserServiceImpl implements UserService {
 		return count;
 	}
 
+	/**
+	* ユーザーログイン
+	* */
+	
 	@Override
 	public UserAuth getUserByUserCodeAndPassword(UserAuth userAuth) {
 
@@ -119,7 +123,34 @@ public class UserServiceImpl implements UserService {
 	            .toUpperCase();
 
 	    criteria.andUserCodeEqualTo(userAuth.getUserCode());
-	    criteria.andPasswordEqualTo(md5Password);
+
+
+	    List<UserAuth> users = userAuthMapper.selectByExample(example);
+
+	    if (users.isEmpty()) {
+	        return null;
+	    }
+
+	    UserAuth dbUser = users.get(0);
+
+	    if (dbUser.getPassword().equals(md5Password)) {
+	        return dbUser;
+	    } else {
+	        return null;
+	    }
+	}
+	
+	/**
+	* ユーザ認証チェック
+	* */
+	
+	@Override
+	public UserAuth getUserByUserCode(String userCode) {
+
+	    UserAuthExample example = new UserAuthExample();
+	    UserAuthExample.Criteria criteria = example.createCriteria();
+
+	    criteria.andUserCodeEqualTo(userCode);
 
 	    List<UserAuth> users = userAuthMapper.selectByExample(example);
 

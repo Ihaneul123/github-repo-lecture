@@ -45,5 +45,8 @@
 		    <generatedKey column="syain_id" sqlStatement="PostgreSQL"
 		        identity="true" />
 		</table>
+		<table tableName="USER_ACCESS_LOG" domainObjectName="UserAccessLog">
+		    <generatedKey column="ID" sqlStatement="JDBC" identity="true"/>
+		</table>
 	</context>
 </generatorConfiguration>

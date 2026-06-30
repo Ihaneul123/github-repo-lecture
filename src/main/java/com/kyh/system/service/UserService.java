@@ -24,4 +24,6 @@ public interface UserService {
 	public int getCount();
 	
 	UserAuth getUserByUserCodeAndPassword(UserAuth userAuth);
+	
+	UserAuth getUserByUserCode(String userCode);
 }
