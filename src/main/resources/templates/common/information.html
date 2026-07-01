@@ -12,9 +12,15 @@
 
 <form id="searchForm">
     所属会社
-    <select name="companyId">
-        <option value="">全て</option>
-    </select>
+	<select name="companyId">
+	    <option value="">全て</option>
+		<option
+		    th:each="company : ${companyList}"
+		    th:value="${company.category2}"
+		    th:text="${company.value1}">
+		</option>
+
+	</select>
 
     社員名
     <input type="text" name="employeeName">
@@ -22,13 +28,17 @@
     <br><br>
 
     職業種類
-    <select name="jobKind">
-        <option value="ITエンジニア">ITエンジニア</option>
-    </select>
+	<select name="jobKind">
+		<option
+		    th:each="job : ${jobList}"
+		    th:value="${job.category3}"
+		    th:text="${job.value1}"
+		    th:selected="${job.value1 == 'ITエンジニア'}">
+		</option>
+	</select>
 
     在職
     <input type="checkbox" name="working" checked>
-
     非在職
     <input type="checkbox" name="retired">
 
@@ -40,7 +50,7 @@
 <h3>■社員一覧</h3>
 
 <div>
-    件数：<span id="count">0</span>件
+    件数：<span th:text="${#lists.size(syainList)}">0</span>件
     <button type="button">新規登録</button>
 </div>
 
@@ -56,10 +66,20 @@
             <th>編集</th>
         </tr>
     </thead>
-    <tbody>
-        <!-- 나중에 DB 결과 표시 -->
-    </tbody>
+	<tbody>
+	    <tr th:each="syain : ${syainList}">
+	        <td th:text="${companyMap[syain.syozokuKaisya]}"></td>
+	        <td th:text="${syain.firstNameKanji + syain.lastNameKanji}"></td>
+	     	<td th:text="${genderMap[syain.seibetu]}"></td>
+			<td th:text="${jobMap[syain.syokugyoKind]}"></td>
+	        <td th:text="${syain.nyuusyaDate}"></td>
+	        <td th:text="${syain.taisyaDate}"></td>
+	        <td>
+	            <a href="#">更新</a>
+	            <a href="#">削除</a>
+	        </td>
+	    </tr>
+	</tbody>
 </table>
-
 </body>
 </html>

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kyh.system.model.User;
+import com.kyh.system.service.SettingService;
+import com.kyh.system.service.SyainService;
 import com.kyh.system.service.UserService;
 
 @Controller
@@ -26,11 +28,25 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SettingService settingService;
+	
+	@Autowired
+	private SyainService syainService;
 
 	// ユーザー管理のタグ
 	@RequestMapping(value = "/userinfomation", method = { RequestMethod.POST, RequestMethod.GET })
-	public String userinfomation(HttpSession session) {
-		return "/common/information";
+	public ModelAndView userinfomation(HttpSession session) {
+	    ModelAndView model = new ModelAndView();
+	    model.addObject("companyList",settingService.getSettingsByCategory1AndCategory3(1, 1));
+	    model.addObject("jobList", settingService.getSettingsByCategory1AndCategory2(3, 4));
+	    model.addObject("syainList", syainService.selectAll());
+	    model.addObject("companyMap", settingService.getSettingMapByCategory1AndCategory3(1, 1));
+	    model.addObject("genderMap", settingService.getSettingMapByCategory1AndCategory2(3, 1));
+	    model.addObject("jobMap", settingService.getSettingMapByCategory1AndCategory2(3, 4));
+	    model.setViewName("/common/information");
+	    return model;
 	}
 
 	// 個人情報のタグ
