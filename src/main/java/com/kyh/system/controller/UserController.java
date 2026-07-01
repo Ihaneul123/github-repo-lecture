@@ -191,9 +191,7 @@ public class UserController {
 		user.setPassword(newpassword2);
 		try {
 			userService.update(user);
-			
-			session.setAttribute("user", userService.getUserByPrimaryKey(no));
-			
+			session.setAttribute("user", userService.getUserByPrimaryKey(no));			
 			result.put("success", "true");
 			return result;
 		} catch (Exception e) {

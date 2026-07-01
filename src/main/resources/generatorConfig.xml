@@ -38,7 +38,7 @@
 			targetPackage="com.kyh.system.mapper" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<!-- 生成するテーブル tableNameはデータベース内のテーブル名またはビュー名、domainObjectNameはエンティティクラス名 -->
+<!--		 生成するテーブル tableNameはデータベース内のテーブル名またはビュー名、domainObjectNameはエンティティクラス名 -->
 		<table tableName="user_auth" domainObjectName="UserAuth">
 		</table>
 		<table tableName="syain_main" domainObjectName="Syain">
@@ -48,5 +48,6 @@
 		<table tableName="USER_ACCESS_LOG" domainObjectName="UserAccessLog">
 		    <generatedKey column="ID" sqlStatement="JDBC" identity="true"/>
 		</table>
+		<table tableName="tg_setting" domainObjectName="Setting"></table>
 	</context>
 </generatorConfiguration>
