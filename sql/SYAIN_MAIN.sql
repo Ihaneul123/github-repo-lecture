@@ -51,3 +51,29 @@ CREATE TABLE SYAIN_MAIN (
     TOUROKUBI TIMESTAMP,
     KOUSINNBI TIMESTAMP
 );
+
+INSERT INTO syain_main (
+    first_name_kanji,
+    last_name_kanji,
+    first_name_kana,
+    last_name_kana,
+    first_name_eigo,
+    last_name_eigo,
+    seibetu,
+    syozoku_kaisya,
+    nyuusya_date,
+    taisya_date,
+    syokugyo_kind,
+    delete_flag,
+    tourokubi,
+    kousinnbi
+) VALUES
+('一輝', '星川', 'イッキ', 'ホシカワ', 'Ikki', 'Hoshikawa', 1, 1, '2017-06-11', NULL, 4, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('艶', '呉', 'エン', 'ゴ', 'En', 'Go', 2, 1, '2018-04-01', NULL, 3, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('日那', '道', 'ヒナ', 'ドウ', 'Hina', 'Dou', 2, 1, '2019-04-01', NULL, 4, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('玲珠', 'ボウ', 'レイジュ', 'ボウ', 'Reiju', 'Bou', 2, 2, '2020-04-01', NULL, 4, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('エギ', '王', 'エギ', 'オウ', 'Egi', 'Ou', 1, 2, '2021-04-01', NULL, 2, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('安琦', '何', 'アンキ', 'カ', 'Anki', 'Ka', 2, 1, '2021-10-01', NULL, 4, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('暢', 'タク', 'チョウ', 'タク', 'Chou', 'Taku', 1, 2, '2022-04-01', '2024-03-31', 3, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+SELECT COUNT(*) FROM syain_main;

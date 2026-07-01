@@ -4,56 +4,86 @@
     <meta charset="UTF-8">
     <title>社員管理</title>
 </head>
+<script>
+function searchSyain() {
+    const working = document.querySelector('[name="working"]').checked;
+    const retired = document.querySelector('[name="retired"]').checked;
+    if (!working && !retired) {
+        alert('在籍と非在籍がいずれにしても、１つのチェックが必須です。');
+        return false;
+    }
+    return true;
+}
+
+function deleteSyain(syainId, syainName) {
+    if (!confirm(syainName + 'を削除してもよろしいですか？')) {
+        return;
+    }
+    fetch('/user/deleteSyain', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'syainId=' + encodeURIComponent(syainId)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success === 'true') {
+            document.getElementById('searchForm').submit();
+        }
+    });
+}
+</script>
 <body>
-
 <h2>社員管理</h2>
-
 <h3>■検索条件</h3>
-
-<form id="searchForm">
+<form id="searchForm"
+			action="/user/userinfomation"method="post"onsubmit="return searchSyain();">
     所属会社
 	<select name="companyId">
-	    <option value="">全て</option>
-		<option
-		    th:each="company : ${companyList}"
-		    th:value="${company.category2}"
-		    th:text="${company.value1}">
+		<option value=""
+				th:selected="${selectedCompanyId == null}">
+			全て
 		</option>
-
+		<option
+			th:each="company : ${companyList}"
+			th:value="${company.category2}"
+			th:text="${company.value1}"
+			th:selected="${selectedCompanyId == company.category2}">
+		</option>
 	</select>
-
     社員名
-    <input type="text" name="employeeName">
-
+	<input type="text"
+	       name="employeeName"
+	       th:value="${selectedEmployeeName}">
     <br><br>
-
     職業種類
 	<select name="jobKind">
 		<option
 		    th:each="job : ${jobList}"
 		    th:value="${job.category3}"
 		    th:text="${job.value1}"
-		    th:selected="${job.value1 == 'ITエンジニア'}">
+		    th:selected="${selectedJobKind == job.category3}">
 		</option>
 	</select>
-
     在職
-    <input type="checkbox" name="working" checked>
+	<input type="checkbox"
+	       name="working"
+	       th:checked="${selectedWorking}">
     非在職
-    <input type="checkbox" name="retired">
-
+	<input type="checkbox"
+	       name="retired"
+	       th:checked="${selectedRetired}">
     <br><br>
-
-    <button type="button">検索</button>
+   <button type="submit">検索</button>
 </form>
-
 <h3>■社員一覧</h3>
-
 <div>
     件数：<span th:text="${#lists.size(syainList)}">0</span>件
-    <button type="button">新規登録</button>
+	<button type="button"onclick="location.href='/user/registerSyain'">
+	    新規登録
+	</button>
 </div>
-
 <table border="1" width="100%">
     <thead>
         <tr>
@@ -72,12 +102,19 @@
 	        <td th:text="${syain.firstNameKanji + syain.lastNameKanji}"></td>
 	     	<td th:text="${genderMap[syain.seibetu]}"></td>
 			<td th:text="${jobMap[syain.syokugyoKind]}"></td>
-	        <td th:text="${syain.nyuusyaDate}"></td>
-	        <td th:text="${syain.taisyaDate}"></td>
-	        <td>
-	            <a href="#">更新</a>
-	            <a href="#">削除</a>
-	        </td>
+			<td th:text="${syain.nyuusyaDate != null ? #dates.format(syain.nyuusyaDate, 'yyyy年MM月dd日') : ''}"></td>
+			<td th:text="${syain.taisyaDate != null ? #dates.format(syain.taisyaDate, 'yyyy年MM月dd日') : ''}"></td>
+			<td>
+				<a th:href="@{/user/updateSyain(syainId=${syain.syainId})}">更新</a>
+				<span th:if="${session.user.userRole == 'S'}">
+				    <a href="javascript:void(0);"
+				       th:data-syain-id="${syain.syainId}"
+				       th:data-syain-name="${syain.lastNameKanji + syain.firstNameKanji}"
+				       onclick="deleteSyain(this.dataset.syainId, this.dataset.syainName)">
+				        削除
+				    </a>
+				</span>
+			</td>
 	    </tr>
 	</tbody>
 </table>

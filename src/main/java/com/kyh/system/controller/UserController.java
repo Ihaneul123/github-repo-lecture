@@ -1,5 +1,6 @@
 package com.kyh.system.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,20 +36,55 @@ public class UserController {
 	@Autowired
 	private SyainService syainService;
 
-	// ユーザー管理のタグ
-	@RequestMapping(value = "/userinfomation", method = { RequestMethod.POST, RequestMethod.GET })
+	// 社員管理 初期表示
+	@RequestMapping(value = "/userinfomation", method = RequestMethod.GET) 
 	public ModelAndView userinfomation(HttpSession session) {
+		ModelAndView model = new ModelAndView(); 
+		model.addObject("companyList",settingService.getSettingsByCategory1AndCategory3(1, 1)); 
+		model.addObject("jobList", settingService.getSettingsByCategory1AndCategory2(3, 4)); 
+		model.addObject("syainList", new ArrayList<>());
+		model.addObject("companyMap", settingService.getSettingMapByCategory1AndCategory3(1, 1));
+		model.addObject("genderMap", settingService.getSettingMapByCategory1AndCategory2(3, 1)); 
+		model.addObject("jobMap", settingService.getSettingMapByCategory1AndCategory2(3, 4)); 
+		
+		model.addObject("selectedCompanyId", null);
+		model.addObject("selectedEmployeeName", "");
+		model.addObject("selectedJobKind", 4);
+		model.addObject("selectedWorking", true);
+		model.addObject("selectedRetired", false);
+		
+		model.setViewName("/common/information"); return model; 
+	}
+	
+	// 社員管理検索
+	@RequestMapping(value = "/userinfomation", method = RequestMethod.POST)
+	public ModelAndView searchSyain(
+	        @RequestParam(required = false) Integer companyId,
+	        @RequestParam(required = false) String employeeName,
+	        @RequestParam(required = false) Integer jobKind,
+	        @RequestParam(required = false, defaultValue = "false") boolean working,
+	        @RequestParam(required = false, defaultValue = "false") boolean retired,
+	        HttpSession session) {
 	    ModelAndView model = new ModelAndView();
-	    model.addObject("companyList",settingService.getSettingsByCategory1AndCategory3(1, 1));
+
+	    model.addObject("companyList", settingService.getSettingsByCategory1AndCategory3(1, 1));
 	    model.addObject("jobList", settingService.getSettingsByCategory1AndCategory2(3, 4));
-	    model.addObject("syainList", syainService.selectAll());
+	    model.addObject("syainList",
+	            syainService.search(companyId, employeeName, jobKind, working, retired));
 	    model.addObject("companyMap", settingService.getSettingMapByCategory1AndCategory3(1, 1));
 	    model.addObject("genderMap", settingService.getSettingMapByCategory1AndCategory2(3, 1));
 	    model.addObject("jobMap", settingService.getSettingMapByCategory1AndCategory2(3, 4));
+
+	    model.addObject("selectedCompanyId", companyId);
+	    model.addObject("selectedEmployeeName", employeeName);
+	    model.addObject("selectedJobKind", jobKind);
+	    model.addObject("selectedWorking", working);
+	    model.addObject("selectedRetired", retired);
+	    
 	    model.setViewName("/common/information");
 	    return model;
 	}
-
+	
 	// 個人情報のタグ
 	@RequestMapping(value = "/myInfo", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView myInfo(HttpSession session) {
@@ -171,7 +207,42 @@ public class UserController {
 		}
 		return map;
 	}
+	
+	// 社員情報の更新
+	@RequestMapping(value = "/updateSyain", method = RequestMethod.GET)
+	public ModelAndView updateSyain(@RequestParam("syainId") Integer syainId) {
+	    ModelAndView model = new ModelAndView();
+	    model.addObject("syainId", syainId);
+	    model.setViewName("/common/update");
+	    return model;
+	}
+	
+	// 社員新規登録画面へ遷移
+	@RequestMapping(value = "/registerSyain", method = RequestMethod.GET)
+	public ModelAndView registerSyain() {
+	    ModelAndView model = new ModelAndView();
+	    model.setViewName("/common/registerSyain");
+	    return model;
+	}
+	
+	// 社員削除
+	@PostMapping("/deleteSyain")
+	@ResponseBody
+	public Map<String, String> deleteSyain(
+	        @RequestParam("syainId") Integer syainId) {
 
+	    Map<String, String> map = new HashMap<>();
+
+	    try {
+	        syainService.delete(syainId);
+	        map.put("success", "true");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return map;
+	}
+	
 	// 右上のパスワード変更機能
 	@PostMapping(value = "/modifypassword")
 	@ResponseBody
