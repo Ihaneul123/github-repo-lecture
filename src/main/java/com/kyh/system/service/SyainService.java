@@ -19,5 +19,9 @@ public interface SyainService {
     void delete(Integer syainId);
 
 	void insert(Syain syain);
+	
+	Syain selectByPrimaryKey(Integer syainId);
+
+	void update(Syain syain);
  
 }

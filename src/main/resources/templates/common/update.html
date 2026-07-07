@@ -4,11 +4,149 @@
 <meta charset="UTF-8">
 <title>社員更新</title>
 </head>
+<script>
+	function checkUpdate() {
+	    if (
+	        document.getElementsByName("firstNameKanji")[0].value == document.getElementById("oldFirstNameKanji").value &&
+	        document.getElementsByName("lastNameKanji")[0].value == document.getElementById("oldLastNameKanji").value &&
+	        document.getElementsByName("firstNameKana")[0].value == document.getElementById("oldFirstNameKana").value &&
+	        document.getElementsByName("lastNameKana")[0].value == document.getElementById("oldLastNameKana").value &&
+	        document.getElementsByName("firstNameEigo")[0].value == document.getElementById("oldFirstNameEigo").value &&
+	        document.getElementsByName("lastNameEigo")[0].value == document.getElementById("oldLastNameEigo").value &&
+	        document.querySelector('input[name="seibetu"]:checked').value == document.getElementById("oldSeibetu").value &&
+	        document.getElementsByName("syozokuKaisya")[0].value == document.getElementById("oldSyozokuKaisya").value &&
+	        document.getElementsByName("nyuusyaDate")[0].value == document.getElementById("oldNyuusyaDate").value &&
+	        document.getElementsByName("taisyaDate")[0].value == document.getElementById("oldTaisyaDate").value &&
+	        document.getElementsByName("syokugyoKind")[0].value == document.getElementById("oldSyokugyoKind").value
+	    ) {
+	        alert("社員変更項目がありません。");
+	        return false;
+	    }
+
+	    return true;
+	}
+</script>
+<script th:if="${param.updateSuccess}">
+    alert("更新が完了しました。");
+</script>
+
+<script th:if="${param.updateError}">
+    alert("更新に失敗しました。");
+</script>
 <body>
 
-<h2>社員更新画面</h2>
+<h2>社員更新</h2>
 
-<p th:text="${'社員ID：' + param.syainId}"></p>
+<form action="/user/updateSyain"
+      method="post"
+      onsubmit="return checkUpdate()">
+
+    <input type="hidden" name="syainId" th:value="${syain.syainId}">
+
+    <h3>基本情報</h3>
+
+    <table border="0">
+        <tr>
+            <td>社員名（漢字）</td>
+            <td>
+                姓 <input type="text" name="firstNameKanji" th:value="${syain.firstNameKanji}">
+                名 <input type="text" name="lastNameKanji" th:value="${syain.lastNameKanji}">
+				<input type="hidden" id="oldFirstNameKanji" th:value="${syain.firstNameKanji}">
+				<input type="hidden" id="oldLastNameKanji" th:value="${syain.lastNameKanji}">
+                必須
+            </td>
+        </tr>
+
+        <tr>
+            <td>社員名（カタカナ）</td>
+            <td>
+                セイ <input type="text" name="firstNameKana" th:value="${syain.firstNameKana}">
+                メイ <input type="text" name="lastNameKana" th:value="${syain.lastNameKana}">
+				<input type="hidden" id="oldFirstNameKana" th:value="${syain.firstNameKana}">
+				<input type="hidden" id="oldLastNameKana" th:value="${syain.lastNameKana}">
+                必須
+            </td>
+        </tr>
+
+        <tr>
+            <td>社員名（英語）</td>
+            <td>
+                first name <input type="text" name="firstNameEigo" th:value="${syain.firstNameEigo}">
+                last name <input type="text" name="lastNameEigo" th:value="${syain.lastNameEigo}">
+				<input type="hidden" id="oldFirstNameEigo" th:value="${syain.firstNameEigo}">
+				<input type="hidden" id="oldLastNameEigo" th:value="${syain.lastNameEigo}">
+                必須
+            </td>
+        </tr>
+
+        <tr>
+            <td>性別</td>
+            <td>
+                <label>
+                    <input type="radio" name="seibetu" value="1" th:checked="${syain.seibetu == 1}"> 男
+                </label>
+                <label>
+                    <input type="radio" name="seibetu" value="2" th:checked="${syain.seibetu == 2}"> 女
+                </label>
+				<input type="hidden" id="oldSeibetu" th:value="${syain.seibetu}">
+            </td>
+        </tr>
+    </table>
+	
+	<h3>会社関連情報</h3>
+	<table border="0">
+	    <tr>
+	        <td>所属会社</td>
+	        <td>
+				<select name="syozokuKaisya">
+				    <option th:each="company : ${companyList}"
+				            th:value="${company.category2}"
+				            th:text="${company.value1}"
+				            th:selected="${company.category2 == syain.syozokuKaisya}">
+				    </option>
+				</select>
+				<input type="hidden" id="oldSyozokuKaisya" th:value="${syain.syozokuKaisya}">
+	        </td>
+	    </tr>
+	    <tr>
+	        <td>入社日</td>
+	        <td>
+				<input type="date"
+				       name="nyuusyaDate"
+				       th:value="${#dates.format(syain.nyuusyaDate,'yyyy-MM-dd')}">
+				<input type="hidden" id="oldNyuusyaDate" 
+					   th:value="${syain.nyuusyaDate != null ? #dates.format(syain.nyuusyaDate,'yyyy-MM-dd') : ''}">
+	        </td>
+	    </tr>
+	    <tr>
+	        <td>退社日</td>
+	        <td>
+				<input type="date"
+				       name="taisyaDate"
+				       th:value="${syain.taisyaDate != null ? #dates.format(syain.taisyaDate,'yyyy-MM-dd') : ''}">
+				 <input type="hidden" id="oldTaisyaDate"
+				 		 th:value="${syain.taisyaDate != null ? #dates.format(syain.taisyaDate,'yyyy-MM-dd') : ''}">
+					   ※YYYY-MM-DD
+	        </td>
+	    </tr>
+	    <tr>
+	        <td>職業種類</td>
+	        <td>
+				<select name="syokugyoKind">
+				    <option th:each="job : ${jobList}"
+				            th:value="${job.category3}"
+				            th:text="${job.value1}"
+				            th:selected="${job.category3 == syain.syokugyoKind}">
+				    </option>
+				</select>
+
+				<input type="hidden" id="oldSyokugyoKind" th:value="${syain.syokugyoKind}">
+	        </td>
+	    </tr>
+	</table>
+    <button type="submit">更新</button>
+
+</form>
 
 </body>
 </html>

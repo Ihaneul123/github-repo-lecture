@@ -215,7 +215,13 @@ public class UserController {
 	@RequestMapping(value = "/updateSyain", method = RequestMethod.GET)
 	public ModelAndView updateSyain(@RequestParam("syainId") Integer syainId) {
 	    ModelAndView model = new ModelAndView();
-	    model.addObject("syainId", syainId);
+
+	    Syain syain = syainService.selectByPrimaryKey(syainId);
+
+	    model.addObject("syain", syain);
+	    model.addObject("companyList", settingService.getSettingsByCategory1AndCategory3(1, 1));
+	    model.addObject("jobList", settingService.getSettingsByCategory1AndCategory2(3, 4));
+
 	    model.setViewName("/common/update");
 	    return model;
 	}
@@ -386,6 +392,57 @@ public class UserController {
 		return result;
 	}
 
+	@PostMapping("/updateSyain")
+	public ModelAndView updateSyainPost(
+	        @RequestParam("syainId") Integer syainId,
+	        @RequestParam("firstNameKanji") String firstNameKanji,
+	        @RequestParam("lastNameKanji") String lastNameKanji,
+	        @RequestParam("firstNameKana") String firstNameKana,
+	        @RequestParam("lastNameKana") String lastNameKana,
+	        @RequestParam("firstNameEigo") String firstNameEigo,
+	        @RequestParam("lastNameEigo") String lastNameEigo,
+	        @RequestParam("seibetu") Integer seibetu,
+	        @RequestParam("syozokuKaisya") Integer syozokuKaisya,
+	        @RequestParam(required = false) String nyuusyaDate,
+	        @RequestParam(required = false) String taisyaDate,
+	        @RequestParam("syokugyoKind") Integer syokugyoKind) {
+
+	    try {
+	        Syain syain = new Syain();
+
+	        syain.setSyainId(syainId);
+	        syain.setFirstNameKanji(firstNameKanji);
+	        syain.setLastNameKanji(lastNameKanji);
+	        syain.setFirstNameKana(firstNameKana);
+	        syain.setLastNameKana(lastNameKana);
+	        syain.setFirstNameEigo(firstNameEigo);
+	        syain.setLastNameEigo(lastNameEigo);
+	        syain.setSeibetu(seibetu);
+	        syain.setSyozokuKaisya(syozokuKaisya);
+	        syain.setSyokugyoKind(syokugyoKind);
+
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+	        if (nyuusyaDate != null && !nyuusyaDate.isEmpty()) {
+	            syain.setNyuusyaDate(sdf.parse(nyuusyaDate));
+	        }
+
+	        if (taisyaDate != null && !taisyaDate.isEmpty()) {
+	            syain.setTaisyaDate(sdf.parse(taisyaDate));
+	        }
+
+	        syain.setKousinnbi(new Date());
+
+	        syainService.update(syain);
+
+	        return new ModelAndView("redirect:/user/userinfomation?updateSuccess=1");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return new ModelAndView("redirect:/user/userinfomation?updateError=1");
+	    }
+	}
+	
 	// ログアウト
 	@RequestMapping(value = "/exit", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView exit(HttpSession session) {

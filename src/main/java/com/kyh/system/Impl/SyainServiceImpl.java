@@ -92,4 +92,14 @@ public class SyainServiceImpl implements SyainService {
     public void insert(Syain syain) {
         syainMapper.insertSelective(syain);
     }
+    
+    // 社員更新
+    @Override
+    public Syain selectByPrimaryKey(Integer syainId) {
+        return syainMapper.selectByPrimaryKey(syainId);
+    }
+    @Override
+    public void update(Syain syain) {
+        syainMapper.updateByPrimaryKeySelective(syain);
+    }
 }

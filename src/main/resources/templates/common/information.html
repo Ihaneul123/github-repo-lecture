@@ -121,5 +121,16 @@ function deleteSyain(syainId, syainName) {
 <script th:if="${param.success}">
     alert("登録が完了しました。");
 </script>
+<script th:if="${param.success}">
+    alert("登録が完了しました。");
+</script>
+
+<script th:if="${param.updateSuccess}">
+    alert("更新が完了しました。");
+</script>
+
+<script th:if="${param.updateError}">
+    alert("更新に失敗しました。");
+</script>
 </body>
 </html>
