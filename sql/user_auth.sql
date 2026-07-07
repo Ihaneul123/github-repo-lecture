@@ -26,6 +26,10 @@ INSERT INTO user_auth
 VALUES
 (99, 'Testuser2021', 'テストユーザー', '25D55AD283AA400AF464C76D713C07AD', 'A', 1);
 
+UPDATE user_auth
+SET password = 'F30D11E83233D9731934A277E3E4A2E9'
+WHERE user_code = 'Hoshikawa2021';
+
 SELECT *
 FROM user_auth
-WHERE user_code = 'Testuser2021';
+WHERE user_code = 'Hoshikawa2021';

@@ -118,5 +118,8 @@ function deleteSyain(syainId, syainName) {
 	    </tr>
 	</tbody>
 </table>
+<script th:if="${param.success}">
+    alert("登録が完了しました。");
+</script>
 </body>
 </html>

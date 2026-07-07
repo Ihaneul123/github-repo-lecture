@@ -39,15 +39,15 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 <!--		 生成するテーブル tableNameはデータベース内のテーブル名またはビュー名、domainObjectNameはエンティティクラス名 -->
-		<table tableName="user_auth" domainObjectName="UserAuth">
-		</table>
+<!--		<table tableName="user_auth" domainObjectName="UserAuth">-->
+<!--		</table>-->
 		<table tableName="syain_main" domainObjectName="Syain">
 		    <generatedKey column="syain_id" sqlStatement="PostgreSQL"
 		        identity="true" />
 		</table>
-		<table tableName="USER_ACCESS_LOG" domainObjectName="UserAccessLog">
-		    <generatedKey column="ID" sqlStatement="JDBC" identity="true"/>
-		</table>
-		<table tableName="tg_setting" domainObjectName="Setting"></table>
+<!--		<table tableName="USER_ACCESS_LOG" domainObjectName="UserAccessLog">-->
+<!--		    <generatedKey column="ID" sqlStatement="JDBC" identity="true"/>-->
+<!--		</table>-->
+<!--		<table tableName="tg_setting" domainObjectName="Setting"></table>-->
 	</context>
 </generatorConfiguration>

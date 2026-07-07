@@ -86,4 +86,10 @@ public class SyainServiceImpl implements SyainService {
         syain.setDeleteFlag(1);
         syainMapper.updateByPrimaryKeySelective(syain);
     }
+    
+    // 社員追加
+    @Override
+    public void insert(Syain syain) {
+        syainMapper.insertSelective(syain);
+    }
 }

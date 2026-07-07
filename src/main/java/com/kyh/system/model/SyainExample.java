@@ -3521,6 +3521,426 @@ public class SyainExample {
             addCriterion("kousinnbi not between", value1, value2, "kousinnbi");
             return (Criteria) this;
         }
+
+        public Criteria andKinyukikanCodeIsNull() {
+            addCriterion("kinyukikan_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeIsNotNull() {
+            addCriterion("kinyukikan_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeEqualTo(String value) {
+            addCriterion("kinyukikan_code =", value, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeNotEqualTo(String value) {
+            addCriterion("kinyukikan_code <>", value, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeGreaterThan(String value) {
+            addCriterion("kinyukikan_code >", value, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("kinyukikan_code >=", value, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeLessThan(String value) {
+            addCriterion("kinyukikan_code <", value, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeLessThanOrEqualTo(String value) {
+            addCriterion("kinyukikan_code <=", value, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeLike(String value) {
+            addCriterion("kinyukikan_code like", value, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeNotLike(String value) {
+            addCriterion("kinyukikan_code not like", value, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeIn(List<String> values) {
+            addCriterion("kinyukikan_code in", values, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeNotIn(List<String> values) {
+            addCriterion("kinyukikan_code not in", values, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeBetween(String value1, String value2) {
+            addCriterion("kinyukikan_code between", value1, value2, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanCodeNotBetween(String value1, String value2) {
+            addCriterion("kinyukikan_code not between", value1, value2, "kinyukikanCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameIsNull() {
+            addCriterion("kinyukikan_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameIsNotNull() {
+            addCriterion("kinyukikan_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameEqualTo(String value) {
+            addCriterion("kinyukikan_name =", value, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameNotEqualTo(String value) {
+            addCriterion("kinyukikan_name <>", value, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameGreaterThan(String value) {
+            addCriterion("kinyukikan_name >", value, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameGreaterThanOrEqualTo(String value) {
+            addCriterion("kinyukikan_name >=", value, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameLessThan(String value) {
+            addCriterion("kinyukikan_name <", value, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameLessThanOrEqualTo(String value) {
+            addCriterion("kinyukikan_name <=", value, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameLike(String value) {
+            addCriterion("kinyukikan_name like", value, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameNotLike(String value) {
+            addCriterion("kinyukikan_name not like", value, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameIn(List<String> values) {
+            addCriterion("kinyukikan_name in", values, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameNotIn(List<String> values) {
+            addCriterion("kinyukikan_name not in", values, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameBetween(String value1, String value2) {
+            addCriterion("kinyukikan_name between", value1, value2, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKinyukikanNameNotBetween(String value1, String value2) {
+            addCriterion("kinyukikan_name not between", value1, value2, "kinyukikanName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeIsNull() {
+            addCriterion("siten_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeIsNotNull() {
+            addCriterion("siten_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeEqualTo(String value) {
+            addCriterion("siten_code =", value, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeNotEqualTo(String value) {
+            addCriterion("siten_code <>", value, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeGreaterThan(String value) {
+            addCriterion("siten_code >", value, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("siten_code >=", value, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeLessThan(String value) {
+            addCriterion("siten_code <", value, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeLessThanOrEqualTo(String value) {
+            addCriterion("siten_code <=", value, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeLike(String value) {
+            addCriterion("siten_code like", value, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeNotLike(String value) {
+            addCriterion("siten_code not like", value, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeIn(List<String> values) {
+            addCriterion("siten_code in", values, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeNotIn(List<String> values) {
+            addCriterion("siten_code not in", values, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeBetween(String value1, String value2) {
+            addCriterion("siten_code between", value1, value2, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenCodeNotBetween(String value1, String value2) {
+            addCriterion("siten_code not between", value1, value2, "sitenCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameIsNull() {
+            addCriterion("siten_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameIsNotNull() {
+            addCriterion("siten_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameEqualTo(String value) {
+            addCriterion("siten_name =", value, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameNotEqualTo(String value) {
+            addCriterion("siten_name <>", value, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameGreaterThan(String value) {
+            addCriterion("siten_name >", value, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameGreaterThanOrEqualTo(String value) {
+            addCriterion("siten_name >=", value, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameLessThan(String value) {
+            addCriterion("siten_name <", value, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameLessThanOrEqualTo(String value) {
+            addCriterion("siten_name <=", value, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameLike(String value) {
+            addCriterion("siten_name like", value, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameNotLike(String value) {
+            addCriterion("siten_name not like", value, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameIn(List<String> values) {
+            addCriterion("siten_name in", values, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameNotIn(List<String> values) {
+            addCriterion("siten_name not in", values, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameBetween(String value1, String value2) {
+            addCriterion("siten_name between", value1, value2, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSitenNameNotBetween(String value1, String value2) {
+            addCriterion("siten_name not between", value1, value2, "sitenName");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumIsNull() {
+            addCriterion("kouza_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumIsNotNull() {
+            addCriterion("kouza_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumEqualTo(String value) {
+            addCriterion("kouza_num =", value, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumNotEqualTo(String value) {
+            addCriterion("kouza_num <>", value, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumGreaterThan(String value) {
+            addCriterion("kouza_num >", value, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumGreaterThanOrEqualTo(String value) {
+            addCriterion("kouza_num >=", value, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumLessThan(String value) {
+            addCriterion("kouza_num <", value, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumLessThanOrEqualTo(String value) {
+            addCriterion("kouza_num <=", value, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumLike(String value) {
+            addCriterion("kouza_num like", value, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumNotLike(String value) {
+            addCriterion("kouza_num not like", value, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumIn(List<String> values) {
+            addCriterion("kouza_num in", values, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumNotIn(List<String> values) {
+            addCriterion("kouza_num not in", values, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumBetween(String value1, String value2) {
+            addCriterion("kouza_num between", value1, value2, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andKouzaNumNotBetween(String value1, String value2) {
+            addCriterion("kouza_num not between", value1, value2, "kouzaNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameIsNull() {
+            addCriterion("meigi_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameIsNotNull() {
+            addCriterion("meigi_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameEqualTo(String value) {
+            addCriterion("meigi_name =", value, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameNotEqualTo(String value) {
+            addCriterion("meigi_name <>", value, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameGreaterThan(String value) {
+            addCriterion("meigi_name >", value, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameGreaterThanOrEqualTo(String value) {
+            addCriterion("meigi_name >=", value, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameLessThan(String value) {
+            addCriterion("meigi_name <", value, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameLessThanOrEqualTo(String value) {
+            addCriterion("meigi_name <=", value, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameLike(String value) {
+            addCriterion("meigi_name like", value, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameNotLike(String value) {
+            addCriterion("meigi_name not like", value, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameIn(List<String> values) {
+            addCriterion("meigi_name in", values, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameNotIn(List<String> values) {
+            addCriterion("meigi_name not in", values, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameBetween(String value1, String value2) {
+            addCriterion("meigi_name between", value1, value2, "meigiName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeigiNameNotBetween(String value1, String value2) {
+            addCriterion("meigi_name not between", value1, value2, "meigiName");
+            return (Criteria) this;
+        }
     }
 
     /**

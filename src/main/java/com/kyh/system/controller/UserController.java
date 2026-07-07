@@ -1,6 +1,8 @@
 package com.kyh.system.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kyh.system.model.Syain;
 import com.kyh.system.model.User;
 import com.kyh.system.service.SettingService;
 import com.kyh.system.service.SyainService;
@@ -221,9 +224,105 @@ public class UserController {
 	@RequestMapping(value = "/registerSyain", method = RequestMethod.GET)
 	public ModelAndView registerSyain() {
 	    ModelAndView model = new ModelAndView();
+	    
+	    model.addObject("companyList", settingService.getSettingsByCategory1AndCategory3(1, 1));
+	    model.addObject("jobList", settingService.getSettingsByCategory1AndCategory2(3, 4));
+	    model.addObject("osList", settingService.getSettingsByCategory1AndCategory2(3, 6));
+	    
 	    model.setViewName("/common/registerSyain");
 	    return model;
 	}
+	
+	// 社員新規登録
+	@PostMapping("/registerSyain")
+	public ModelAndView registerSyainPost(
+	        @RequestParam("firstNameKanji") String firstNameKanji,
+	        @RequestParam("lastNameKanji") String lastNameKanji,
+	        @RequestParam("firstNameKana") String firstNameKana,
+	        @RequestParam("lastNameKana") String lastNameKana,
+	        @RequestParam("firstNameEigo") String firstNameEigo,
+	        @RequestParam("lastNameEigo") String lastNameEigo,
+	        @RequestParam("seibetu") Integer seibetu,
+	        @RequestParam("syozokuKaisya") Integer syozokuKaisya,
+	        @RequestParam(required = false) String nyuusyaDate,
+	        @RequestParam(required = false) String taisyaDate,
+	        @RequestParam("syokugyoKind") Integer syokugyoKind,
+	        @RequestParam(required = false) List<Integer> itOsId,
+	        @RequestParam(required = false) List<String> itOsLevel,
+	        @RequestParam(required = false) String kinyukikanCode,
+	        @RequestParam(required = false) String kinyukikanName,
+	        @RequestParam(required = false) String sitenCode,
+	        @RequestParam(required = false) String sitenName,
+	        @RequestParam(required = false) String kouzaNum,
+	        @RequestParam(required = false) String meigiName) {
+
+	    try {
+	        Syain syain = new Syain();
+	        syain.setFirstNameKanji(firstNameKanji);
+	        syain.setLastNameKanji(lastNameKanji);
+	        syain.setFirstNameKana(firstNameKana);
+	        syain.setLastNameKana(lastNameKana);
+	        syain.setFirstNameEigo(firstNameEigo);
+	        syain.setLastNameEigo(lastNameEigo);
+	        syain.setSeibetu(seibetu);
+	        syain.setSyozokuKaisya(syozokuKaisya);
+	        syain.setSyokugyoKind(syokugyoKind);
+	        syain.setKinyukikanCode(kinyukikanCode);
+	        syain.setKinyukikanName(kinyukikanName);
+	        syain.setSitenCode(sitenCode);
+	        syain.setSitenName(sitenName);
+	        syain.setKouzaNum(kouzaNum);
+	        syain.setMeigiName(meigiName);
+
+	        StringBuilder itOs = new StringBuilder();
+
+	        if (itOsId != null && itOsLevel != null) {
+	            for (int i = 0; i < itOsId.size(); i++) {
+	                if (itOsLevel.get(i) != null && !itOsLevel.get(i).isEmpty()) {
+
+	                    if (itOs.length() > 0) {
+	                        itOs.append(",");
+	                    }
+
+	                    itOs.append(itOsId.get(i))
+	                        .append("-")
+	                        .append(itOsLevel.get(i));
+	                }
+	            }
+	        }
+
+	        syain.setItOs(itOs.toString());
+	        
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+	        if (nyuusyaDate != null && !nyuusyaDate.isEmpty()) {
+	            syain.setNyuusyaDate(sdf.parse(nyuusyaDate));
+	        }
+	        if (taisyaDate != null && !taisyaDate.isEmpty()) {
+	            syain.setTaisyaDate(sdf.parse(taisyaDate));
+	        }
+	        
+	        Date now = new Date();
+	        syain.setDeleteFlag(0);
+	        syain.setTourokubi(now);
+	        syain.setKousinnbi(now);
+	        syainService.insert(syain);
+	        return new ModelAndView("redirect:/user/userinfomation?success=1");
+	        
+	        } catch (Exception e) {
+	            e.printStackTrace();
+
+	            ModelAndView mv = new ModelAndView("/common/registerSyain");
+	            mv.addObject("error", "登録に失敗しました。");
+
+	            mv.addObject("companyList", settingService.getSettingsByCategory1AndCategory3(1, 1));
+	            mv.addObject("jobList", settingService.getSettingsByCategory1AndCategory2(3, 4));
+	            mv.addObject("osList", settingService.getSettingsByCategory1AndCategory2(3, 6));
+
+	            return mv;
+	        }
+	}
+	
 	
 	// 社員削除
 	@PostMapping("/deleteSyain")
@@ -239,7 +338,6 @@ public class UserController {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-
 	    return map;
 	}
 	

@@ -16,5 +16,8 @@ public interface SyainService {
     	    boolean retired
     	);
 
-    void delete(Integer syainId);    
+    void delete(Integer syainId);
+
+	void insert(Syain syain);
+ 
 }

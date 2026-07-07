@@ -31,3 +31,21 @@ VALUES
 (3, 4, 4, 'ITエンジニア', 4, 0),
 (3, 4, 5, '不動産スタッフ', 5, 0),
 (3, 4, 6, '個人事業主', 6, 0);
+
+
+INSERT INTO tg_setting
+(category1, category2, category3, value1, display_order, delete_flag)
+VALUES
+(3, 6, 1, 'DOS', 1, 0),
+(3, 6, 2, 'Windows', 2, 0),
+(3, 6, 3, 'Unix', 3, 0),
+(3, 6, 4, 'Linux', 4, 0),
+(3, 6, 5, 'android', 5, 0),
+(3, 6, 6, 'IOS', 6, 0),
+(3, 6, 7, 'AWS', 7, 0),
+(3, 6, 8, 'SAP', 8, 0),
+(3, 6, 9, 'Salesforce', 9, 0),
+(3, 6, 10, 'Cosminexus', 10, 0),
+(3, 6, 11, 'Docker', 11, 0),
+(3, 6, 12, 'Kubernetes', 12, 0),
+(3, 6, 13, 'Containerd', 13, 0);

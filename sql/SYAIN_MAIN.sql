@@ -76,4 +76,44 @@ INSERT INTO syain_main (
 ('安琦', '何', 'アンキ', 'カ', 'Anki', 'Ka', 2, 1, '2021-10-01', NULL, 4, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('暢', 'タク', 'チョウ', 'タク', 'Chou', 'Taku', 1, 2, '2022-04-01', '2024-03-31', 3, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-SELECT COUNT(*) FROM syain_main;
+
+INSERT INTO syain_main (
+    first_name_kanji,
+    last_name_kanji,
+    first_name_kana,
+    last_name_kana,
+    first_name_eigo,
+    last_name_eigo,
+    seibetu,
+    syozoku_kaisya,
+    nyuusya_date,
+    taisya_date,
+    syokugyo_kind,
+    delete_flag,
+    tourokubi,
+    kousinnbi
+) VALUES
+('テスト','削除','テスト','サクジョ','Test','Delete',1,1,'2024-04-01',NULL,4,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+SELECT syain_id,
+       last_name_kanji,
+       first_name_kanji,
+       delete_flag
+FROM syain_main
+WHERE last_name_kanji = '削除'
+  AND first_name_kanji = 'テスト';
+  
+UPDATE syain_main
+SET delete_flag = 0
+WHERE syain_id = 9;
+
+SELECT syain_id,
+       last_name_kanji,
+       first_name_kanji,
+       syozoku_kaisya,
+       syokugyo_kind,
+       nyuusya_date,
+       taisya_date,
+       delete_flag
+FROM syain_main
+ORDER BY syain_id DESC;
