@@ -49,6 +49,12 @@ public class LoginController {
 		UserAuth result = userService.getUserByUserCode(userAuth.getUserCode());
 
 		if (result == null) {
+
+		    Cookie cookie = new Cookie("userCode", "");
+		    cookie.setMaxAge(0);
+		    cookie.setPath("/");
+		    response.addCookie(cookie);
+
 		    model.addObject("MSG", "該当ユーザーが存在しません。");
 		    model.setViewName("/login/login");
 		    return model;
@@ -58,6 +64,12 @@ public class LoginController {
 		        .toUpperCase();
 
 		if (!result.getPassword().equals(md5Password)) {
+
+		    Cookie cookie = new Cookie("userCode", "");
+		    cookie.setMaxAge(0);
+		    cookie.setPath("/");
+		    response.addCookie(cookie);
+
 		    model.addObject("MSG", "パスワードが間違っています。");
 		    model.setViewName("/login/login");
 		    return model;
@@ -82,10 +94,6 @@ public class LoginController {
 	@Autowired
 	private UserAccessLogMapper userAccessLogMapper;
 
-	// index.html
-	//	<div class="content">
-	//	    <iframe src="welcome" id="iframe" width="100%" height="100%" frameborder="0"></iframe>
-	//  </div>
 	@RequestMapping(value = "/login/welcome", method = { RequestMethod.POST, RequestMethod.GET })
 	public String welcome() {
 		return "/login/welcome";

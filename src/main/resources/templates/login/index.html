@@ -26,7 +26,7 @@
 		            <span th:text="${session.user.getUserName()}"></span>
 		            &nbsp;
 		            権限：
-		            <span>ALL</span>
+		            <span th:text="${session.user.userRole}"></span>
 		            &nbsp;
 		            <a href="javascript:;" class="exit">ログアウト</a>
 		        </div>

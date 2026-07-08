@@ -107,13 +107,14 @@ UPDATE syain_main
 SET delete_flag = 0
 WHERE syain_id = 9;
 
-SELECT syain_id,
-       last_name_kanji,
-       first_name_kanji,
-       syozoku_kaisya,
-       syokugyo_kind,
-       nyuusya_date,
-       taisya_date,
-       delete_flag
+SELECT syain_id, last_name_kanji, first_name_kanji, it_os
 FROM syain_main
 ORDER BY syain_id DESC;
+
+ALTER TABLE syain_main
+ADD COLUMN kinyukikan_code VARCHAR(10),
+ADD COLUMN kinyukikan_name VARCHAR(50),
+ADD COLUMN siten_code VARCHAR(10),
+ADD COLUMN siten_name VARCHAR(50),
+ADD COLUMN kouza_num VARCHAR(10),
+ADD COLUMN meigi_name VARCHAR(50);
