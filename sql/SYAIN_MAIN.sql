@@ -76,6 +76,17 @@ INSERT INTO syain_main (
 ('安琦', '何', 'アンキ', 'カ', 'Anki', 'Ka', 2, 1, '2021-10-01', NULL, 4, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('暢', 'タク', 'チョウ', 'タク', 'Chou', 'Taku', 1, 2, '2022-04-01', '2024-03-31', 3, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
+SELECT syain_id, last_name_kanji, first_name_kanji, it_os
+FROM syain_main
+ORDER BY syain_id DESC;
+
+ALTER TABLE syain_main
+ADD COLUMN kinyukikan_code VARCHAR(10),
+ADD COLUMN kinyukikan_name VARCHAR(50),
+ADD COLUMN siten_code VARCHAR(10),
+ADD COLUMN siten_name VARCHAR(50),
+ADD COLUMN kouza_num VARCHAR(10),
+ADD COLUMN meigi_name VARCHAR(50);
 
 INSERT INTO syain_main (
     first_name_kanji,
@@ -95,6 +106,7 @@ INSERT INTO syain_main (
 ) VALUES
 ('テスト','削除','テスト','サクジョ','Test','Delete',1,1,'2024-04-01',NULL,4,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
+--削除テスト
 SELECT syain_id,
        last_name_kanji,
        first_name_kanji,
@@ -105,16 +117,6 @@ WHERE last_name_kanji = '削除'
   
 UPDATE syain_main
 SET delete_flag = 0
-WHERE syain_id = 9;
+WHERE syain_id = 17;
 
-SELECT syain_id, last_name_kanji, first_name_kanji, it_os
-FROM syain_main
-ORDER BY syain_id DESC;
 
-ALTER TABLE syain_main
-ADD COLUMN kinyukikan_code VARCHAR(10),
-ADD COLUMN kinyukikan_name VARCHAR(50),
-ADD COLUMN siten_code VARCHAR(10),
-ADD COLUMN siten_name VARCHAR(50),
-ADD COLUMN kouza_num VARCHAR(10),
-ADD COLUMN meigi_name VARCHAR(50);

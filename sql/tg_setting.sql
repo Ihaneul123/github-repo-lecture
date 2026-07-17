@@ -49,3 +49,39 @@ VALUES
 (3, 6, 11, 'Docker', 11, 0),
 (3, 6, 12, 'Kubernetes', 12, 0),
 (3, 6, 13, 'Containerd', 13, 0);
+
+--拡張性テスト
+INSERT INTO tg_setting
+(category1, category2, category3, value1, display_order, delete_flag)
+VALUES
+(1, 3, 1, '株式会社テスト会社', 3, 0);
+
+INSERT INTO tg_setting
+(category1, category2, category3, value1, display_order, delete_flag)
+VALUES
+(3, 4, 7, 'AIエンジニア', 7, 0);
+
+SELECT *
+FROM tg_setting
+WHERE value1 = 'AIエンジニア';
+
+DELETE FROM tg_setting
+WHERE category1 = 1
+  AND category2 = 3
+  AND category3 = 1;
+
+DELETE FROM tg_setting
+WHERE category1 = 3
+  AND category2 = 4
+  AND category3 = 7;
+  
+ --OS拡張性テスト 
+  INSERT INTO tg_setting
+(category1, category2, category3, value1, display_order, delete_flag)
+VALUES
+(3, 6, 17, 'TestOS', 17, 0);
+
+DELETE FROM tg_setting
+WHERE category1 = 3
+  AND category2 = 6
+  AND category3 = 14;
